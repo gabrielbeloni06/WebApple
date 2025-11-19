@@ -1,11 +1,12 @@
 import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls, Stage, ScrollControls, useScroll, Scroll } from '@react-three/drei'
+import { OrbitControls, Stage, ScrollControls, useScroll, Scroll, Loader } from '@react-three/drei'
 import { Model } from './Model'
 
 function AnimationScene() {
   const ref = useRef()
-  const scroll = useScroll()
+  const scroll = useScroll() 
+
   useFrame((state, delta) => {
     if (ref.current) {
         ref.current.rotation.y = scroll.offset * (Math.PI * 2)
@@ -53,6 +54,12 @@ export default function App() {
           </ScrollControls>
         </Suspense>
       </Canvas>
+      <Loader 
+        containerStyles={{ background: 'black' }} 
+        innerStyles={{ background: 'white', height: '2px' }} 
+        barStyles={{ background: '#00ff00', height: '2px' }} 
+        dataStyles={{ color: 'white', fontSize: '1rem' }} 
+      />
     </div>
   )
 }
